@@ -3,7 +3,10 @@ package com.hashim.BookingsSystem.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -14,8 +17,12 @@ public class Booking {
     @GeneratedValue
     private Integer id;
 
+    @NotBlank
     private String guestName;
+    @NotNull
     private Room roomType;
+    @NotNull
+    @Min(value = 1,message = "Number of guests should at least be 1")
     private Integer numberOfGuests;
     private Integer totalPrice;
 
@@ -55,8 +62,8 @@ public class Booking {
         this.guestName = guestName;
     }
 
-    public String getRoomType() {
-        return roomType.toString();
+    public Room getRoomType() {
+        return roomType;
     }
 
 
