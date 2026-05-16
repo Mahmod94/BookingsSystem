@@ -1,11 +1,9 @@
 package com.hashim.BookingsSystem.controller;
 
 import com.hashim.BookingsSystem.model.Booking;
+import com.hashim.BookingsSystem.model.Room;
 import com.hashim.BookingsSystem.repository.BookingRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,14 @@ public class RoomController {
         this.bookingRepository = bookingRepository;
     }
 
+    @GetMapping("/rooms")
+    public String getAllRooms()
+    {
+        return "Enkel rum: " + Room.ENKEL.getNumberOfRooms().toString()
+                +"\nDubbel rum: " + Room.DUBBEL.getNumberOfRooms() +
+                "\nSvit rum: " + Room.SVIT.getNumberOfRooms();
+    }
+
     @GetMapping("/booking")
     public List<Booking> getAll()
     {
@@ -24,7 +30,7 @@ public class RoomController {
     }
 
     @PostMapping("/booking")
-    public String postBooking(@RequestParam Booking booking){
+    public String postBooking(@RequestBody Booking booking){
         bookingRepository.save(booking);
         return booking.toString();
     }
