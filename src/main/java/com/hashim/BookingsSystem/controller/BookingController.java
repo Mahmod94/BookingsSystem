@@ -3,17 +3,18 @@ package com.hashim.BookingsSystem.controller;
 import com.hashim.BookingsSystem.model.Booking;
 import com.hashim.BookingsSystem.service.BookingService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
-public class RoomController {
+public class BookingController {
 
     BookingService bookingService;
 
-    public RoomController(BookingService bookingService) {
+    public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
 
@@ -31,7 +32,8 @@ public class RoomController {
     }
 
     @PostMapping("/bookings")
-    public Booking postBooking(@Valid @RequestBody Booking booking){
-        return bookingService.addBooking(booking);
+    public ResponseEntity<Booking> postBooking(@Valid @RequestBody Booking booking){
+        bookingService.addBooking(booking);
+        return ResponseEntity.ok(booking);
     }
 }
