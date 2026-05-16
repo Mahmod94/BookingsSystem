@@ -17,10 +17,10 @@ public class Booking {
     private String guestName;
     private Room roomType;
     private Integer numberOfGuests;
-    private Double totalPrice;
+    private Integer totalPrice;
 
 
-    public Booking(Integer id, String guestName, Room roomType, Integer numberOfGuests, Double totalPrice) {
+    public Booking(Integer id, String guestName, Room roomType, Integer numberOfGuests, Integer totalPrice) {
         this.id = id;
         this.guestName = guestName;
         this.roomType = roomType;
@@ -68,11 +68,11 @@ public class Booking {
         this.numberOfGuests = numberOfGuests;
     }
 
-    public Double getTotalPrice() {
+    public Integer getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(Integer totalPrice) {
         this.totalPrice = totalPrice;
     }
 

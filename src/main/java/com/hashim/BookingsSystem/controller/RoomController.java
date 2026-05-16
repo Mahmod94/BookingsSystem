@@ -19,8 +19,9 @@ public class RoomController {
     public String getAllRooms()
     {
         return "Enkel rum: " + Room.ENKEL.getNumberOfRooms().toString()
-                +"\nDubbel rum: " + Room.DUBBEL.getNumberOfRooms() +
-                "\nSvit rum: " + Room.SVIT.getNumberOfRooms();
+                +", Lediga rum: " + (Room.ENKEL.getNumberOfRooms() - bookingRepository.countByRoomType(Room.ENKEL)) +
+                "\nDubbel rum: " + Room.DUBBEL.getNumberOfRooms() + ", Lediga rum: " + (Room.DUBBEL.getNumberOfRooms() - bookingRepository.countByRoomType(Room.DUBBEL)) +
+                "\nSvit rum: " + Room.SVIT.getNumberOfRooms() + ", Lediga rum: " + (Room.SVIT.getNumberOfRooms() - bookingRepository.countByRoomType(Room.SVIT));
     }
 
     @GetMapping("/booking")
@@ -31,6 +32,7 @@ public class RoomController {
 
     @PostMapping("/booking")
     public String postBooking(@RequestBody Booking booking){
+        booking.setTotalPrice(Room.ENKEL.getPrice());
         bookingRepository.save(booking);
         return booking.toString();
     }
