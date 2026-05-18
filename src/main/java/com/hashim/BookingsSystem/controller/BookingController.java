@@ -4,6 +4,7 @@ import com.hashim.BookingsSystem.model.Booking;
 import com.hashim.BookingsSystem.service.BookingService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,22 +19,25 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-
-    @GetMapping("/rooms")
+    @GetMapping("/api/rooms")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Map<String, Integer> getAllRooms()
     {
         return bookingService.getAllRooms();
     }
 
-    @GetMapping("/bookings")
+    @GetMapping("/api/bookings")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Booking> getAll()
     {
         return bookingService.findAllBookings();
     }
 
-    @PostMapping("/bookings")
+    @PostMapping("/api/bookings")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Booking> postBooking(@Valid @RequestBody Booking booking){
         bookingService.addBooking(booking);
         return ResponseEntity.ok(booking);
     }
+
 }
