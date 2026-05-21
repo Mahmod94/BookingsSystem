@@ -1,5 +1,6 @@
 package com.hashim.BookingsSystem.service;
 
+import com.hashim.BookingsSystem.exception.InvalidTokenException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -22,10 +23,11 @@ public class JwtService {
                 .compact();
     }
 
-    public String validateTokenAndGetUserName(String token) {
+    public String validateTokenAndGetUserName(String token){
+
         return Jwts.parser()
-                .setSigningKey(key)
-                .build().parseSignedClaims(token)
+                .setSigningKey(key).build()
+                .parseSignedClaims(token)
                 .getBody().getSubject();
     }
 }
