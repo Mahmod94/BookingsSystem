@@ -1,5 +1,6 @@
 package com.hashim.BookingsSystem.service;
 
+import com.hashim.BookingsSystem.exception.GuestCapacityException;
 import com.hashim.BookingsSystem.model.Booking;
 import com.hashim.BookingsSystem.model.Room;
 import com.hashim.BookingsSystem.repository.BookingRepository;
@@ -22,7 +23,8 @@ public class BookingService {
     public Booking addBooking(Booking booking) throws IllegalArgumentException
     {
         if (booking.getRoomType().getCapacity() < booking.getNumberOfGuests())
-            throw new IllegalArgumentException("Number of guests cannot exceeds the rooms capacity");
+            throw new GuestCapacityException("The number of guests should not be less that 0 or exceeds "
+                    + booking.getRoomType().getCapacity() );
 
         booking.setTotalPrice(booking.getRoomType().getPrice());
         this.bookingRepository.save(booking);

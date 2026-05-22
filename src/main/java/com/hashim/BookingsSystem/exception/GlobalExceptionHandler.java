@@ -1,8 +1,7 @@
 package com.hashim.BookingsSystem.exception;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,4 +19,9 @@ public class GlobalExceptionHandler {
             errors.put(error.getField(), error.getDefaultMessage());
         return ResponseEntity.badRequest().body(errors);
     }
-}
+
+    @ExceptionHandler(GuestCapacityException.class)
+    public ResponseEntity<ErrorResponse> handleGuestCapacityException(GuestCapacityException e) {
+        return ResponseEntity.badRequest()
+                .body(new ErrorResponse(400, e.getMessage()));
+    }

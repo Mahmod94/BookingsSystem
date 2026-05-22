@@ -3,10 +3,7 @@ package com.hashim.BookingsSystem.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 
 @Entity
@@ -24,6 +21,8 @@ public class Booking {
     @NotNull
     @Min(value = 1,message = "Number of guests should at least be 1")
     private Integer numberOfGuests;
+    @Min(value=500, message = "The totalPrice cannot be less that 500")
+    @Max(value = 2000, message = "The max is 2000")
     private Integer totalPrice;
 
 
