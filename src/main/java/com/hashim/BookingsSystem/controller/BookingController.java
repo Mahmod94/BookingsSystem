@@ -40,4 +40,12 @@ public class BookingController {
         return ResponseEntity.ok(booking);
     }
 
+    @DeleteMapping("api/bookings/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteBooking(@Valid @PathVariable int id)
+    {
+        Booking booking = bookingService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

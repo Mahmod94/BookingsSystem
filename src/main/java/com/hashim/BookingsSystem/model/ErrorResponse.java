@@ -7,8 +7,8 @@ public class ErrorResponse {
     private int status;
     private String message;
 
-    public ErrorResponse(LocalDateTime timeStamp, int status, String message) {
-        this.timeStamp = timeStamp;
+    public ErrorResponse(int status, String message) {
+        timeStamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
     }

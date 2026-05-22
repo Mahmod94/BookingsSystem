@@ -14,15 +14,15 @@ public class Booking {
     @GeneratedValue
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "Guest name is required")
+    @Size(min = 2, message = "The guest name cannot be less than 2 characters")
     private String guestName;
     @NotNull
     private Room roomType;
     @NotNull
     @Min(value = 1,message = "Number of guests should at least be 1")
+    @Max(value = 3, message = "Number of guests cannot exceed 3")
     private Integer numberOfGuests;
-    @Min(value=500, message = "The totalPrice cannot be less that 500")
-    @Max(value = 2000, message = "The max is 2000")
     private Integer totalPrice;
 
 

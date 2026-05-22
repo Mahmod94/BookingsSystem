@@ -1,6 +1,8 @@
 package com.hashim.BookingsSystem.service;
 
+import com.hashim.BookingsSystem.exception.BookingNotFountException;
 import com.hashim.BookingsSystem.exception.GuestCapacityException;
+import com.hashim.BookingsSystem.exception.RoomFullyBookedException;
 import com.hashim.BookingsSystem.model.Booking;
 import com.hashim.BookingsSystem.model.Room;
 import com.hashim.BookingsSystem.repository.BookingRepository;
@@ -26,10 +28,16 @@ public class BookingService {
             throw new GuestCapacityException("The number of guests should not be less that 0 or exceeds "
                     + booking.getRoomType().getCapacity() );
 
+
+        if (bookingRepository.countByRoomType(booking.getRoomType()) >= booking.getRoomType().getNumberOfRooms())
+            throw new RoomFullyBookedException();
+
         booking.setTotalPrice(booking.getRoomType().getPrice());
         this.bookingRepository.save(booking);
         return booking;
     }
+
+
 
     public Map<String, Integer> getAllRooms()
     {
@@ -47,6 +55,14 @@ public class BookingService {
     public List<Booking> findAllBookings()
     {
         return bookingRepository.findAll();
+    }
+
+    public Booking deleteById(int id)
+    {
+        Booking booking = bookingRepository.findById(id).orElseThrow(() ->
+                new BookingNotFountException("The booking was not found. Please check the given id!\""));
+        bookingRepository.deleteById(id);
+        return booking;
     }
 
 }
