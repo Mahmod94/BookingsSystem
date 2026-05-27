@@ -22,14 +22,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("api/register")
+    @PostMapping("/api/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest)
     {
         return  this.userService.registerNewUser(registerRequest);
     }
 
 
-    @GetMapping("api/users")
+    @GetMapping("/api/users")
     @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAllUser()
     {
