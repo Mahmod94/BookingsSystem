@@ -1,6 +1,10 @@
 package com.hashim.BookingsSystem.repository;
 
+import com.hashim.BookingsSystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository <User, Long>{
+    Optional<User> findByUsername(String username);
 }

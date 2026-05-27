@@ -31,7 +31,6 @@ public class User implements UserDetails {
         this.password = password;
         this.role = role;
     }
-
     public User() {}
 
     public void setUsername(String username) {
