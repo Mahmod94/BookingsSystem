@@ -63,6 +63,12 @@ Database (H2)
 ### Structured error response
 ![Error response](screenshots/postman-error.png)
 
+### Authenticated API Request
+
+GET /api/rooms with a valid JWT — returns live room inventory with proper security headers.
+
+![Authenticated request](screenshots/swagger-rooms.png)
+
 ## Getting Started
 
 ### Prerequisites
