@@ -64,7 +64,7 @@ public class SecurityConfig {
     {
         return args ->{
             if (userRepository.findByUsername("Mahmod").isEmpty()) {
-                User mahmod = new User("Mahmod", passwordEncoder.encode("000000"), Role.ADMIN);
+                User mahmod = new User("admin", passwordEncoder.encode("changeMe123"), Role.ADMIN);
                 userRepository.save(mahmod);
             }
         };
