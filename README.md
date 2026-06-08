@@ -65,8 +65,6 @@ Database (H2)
 
 ### Authenticated API Request
 
-GET /api/rooms with a valid JWT — returns live room inventory with proper security headers.
-
 ![Authenticated request](screenshots/swagger-rooms.png)
 
 ## Getting Started
